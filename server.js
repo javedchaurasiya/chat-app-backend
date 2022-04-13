@@ -31,14 +31,30 @@ app.get("/", (req, res) => {
 app.use('/register',require('./Routes/register.js'))
 app.use('/login',require('./Routes/login.js'))
 app.use('/verifyUser',require('./Routes/verifyUser.js'))
+app.use('/getChat',require('./Routes/getChat.js'))
+app.use('/searchUser',require('./Routes/searchUser.js'))
+app.use('/addUserToChat',require('./Routes/addUserToChat.js'))
+app.use('/sendMessage',require('./Routes/sendMessage.js'))
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  // console.log(socket.id);
   socket.emit('requestDetails')
   socket.on('getDetails',(userName)=>{
-    console.log(userName);
+    // console.log(userName);
     users[userName]=socket.id
-    console.log(users);
+    // console.log(users);
+  })
+  socket.on('removeUser',(userName)=>{
+    // console.log(userName);
+    delete users[userName]
+    // console.log(users);
+  })
+  socket.on('message',(message)=>{
+    console.log(message);
+    if(users[message.to])
+    {
+      socket.to(users[message.to]).emit('onMessage',message);
+    }
   })
   // socket.emit('hello','rituu raj')
 });
