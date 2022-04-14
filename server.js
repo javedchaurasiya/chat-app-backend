@@ -35,6 +35,8 @@ app.use('/getChat',require('./Routes/getChat.js'))
 app.use('/searchUser',require('./Routes/searchUser.js'))
 app.use('/addUserToChat',require('./Routes/addUserToChat.js'))
 app.use('/sendMessage',require('./Routes/sendMessage.js'))
+app.use('/imageUpload',require('./Routes/imageUpload.js'))
+// app.use('/getImage',require('./Routes/getImage.js'))
 
 io.on("connection", (socket) => {
   // console.log(socket.id);
@@ -49,11 +51,12 @@ io.on("connection", (socket) => {
     delete users[userName]
     // console.log(users);
   })
-  socket.on('message',(message)=>{
-    console.log(message);
+  socket.on('message',(message,imageURL)=>{
+    // console.log(message);
+    // console.log(imageURL);
     if(users[message.to])
     {
-      socket.to(users[message.to]).emit('onMessage',message);
+      socket.to(users[message.to]).emit('onMessage',message,imageURL);
     }
   })
   // socket.emit('hello','rituu raj')

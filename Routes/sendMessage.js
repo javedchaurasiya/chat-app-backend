@@ -40,7 +40,7 @@ router.post('/',verify,async(req,res)=>{
         const sUpdateResponse=await User.findByIdAndUpdate(req.userId,{conversations:senderConversations})
         return res.status(200).json({success:true})
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(400).json({error})
     }
 })

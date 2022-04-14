@@ -7,7 +7,7 @@ const verify = async (req, res, next) => {
     var { authentication } = req.headers;
     // console.log(authentication);
     const token=authentication.split(' ')[1];
-    console.log(token);
+    // console.log(token);
 
     jwt.verify(token,process.env.SECRET,(error,payload)=>{
         if(error)throw error
@@ -18,7 +18,7 @@ const verify = async (req, res, next) => {
     })
     next();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(403).json(error);
   }
 };

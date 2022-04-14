@@ -59,7 +59,7 @@ router.post("/", hashPassword, async (req, res) => {
       conversations,
     });
     const response = await newUser.save();
-    console.log(response);
+    // console.log(response);
 
     jwt.sign(
       { userId: response._id.toString() },
@@ -75,7 +75,7 @@ router.post("/", hashPassword, async (req, res) => {
       }
     );
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(403).json({ error });
   }
 });

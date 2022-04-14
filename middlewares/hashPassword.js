@@ -11,7 +11,7 @@ const hashPassword = async (req, res, next) => {
     req.hash = hash;
     next();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(403).json({ error });
   }
 };

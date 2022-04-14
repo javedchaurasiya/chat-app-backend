@@ -5,7 +5,7 @@ const crypto=require('crypto')
 
 router.post('/',verify,async(req,res)=>{
     try {
-        console.log(req.userId);
+        // console.log(req.userId);
         const {userName,imageURL}=req.body
         const response=await User.findById(req.userId)
         let conversations=response.conversations
@@ -25,10 +25,10 @@ router.post('/',verify,async(req,res)=>{
             filteredConversations.unshift(newConversation)
         }
         const updateResponse=await User.findByIdAndUpdate(req.userId,{conversations:filteredConversations})
-        console.log(updateResponse);
+        // console.log(updateResponse);
         return res.status(200).json({result})
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(404).json({error})
     }
 })
